@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cmath>
 #include <cstring>
-#include <cblas.h>
 #include <random>
 #include <chrono>
 #include <vector>
@@ -95,7 +94,7 @@ class Matrix {
             for (int i = 0; i < n; i++) {
                 double sum = 0;
                 for (int j = 0; j < n; j++) {
-                    if (i > j) {
+                    if (j > i) {
                         A[i * n + j] = (-floatDist(gen));
                         A[j * n + i] = A[i * n + j];
                     }
@@ -103,7 +102,7 @@ class Matrix {
                         sum += A[i * n + j];
                     }
                 }
-                A[i * n + i] = sum + 2;
+                A[i * n + i] = sum + 1;
             }
         }
 
