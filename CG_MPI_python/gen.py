@@ -11,7 +11,7 @@ for i in range(n):
 x_sol = np.random.rand(n)
 b = A @ x_sol
 
-np.savetxt("A.txt", A)
-np.savetxt("b.txt", b)
+A.tofile("A.npy")
+b.tofile("b.npy")
 
 

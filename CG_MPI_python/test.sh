@@ -1,8 +1,8 @@
 #!/bin/bash
 
-for size in 8000 10000 
+for size in 1000 2000 4000 8000 16000 20000 25000 30000
 do
-  python gen.py $size
+  python3 gen.py $size
   for threads in 1 2 4 6
   do
     echo "SIZE: $size, THREADS: $threads:"

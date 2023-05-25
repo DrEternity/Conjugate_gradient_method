@@ -2,6 +2,7 @@ import numpy as np
 from mpi4py import MPI
 import sys 
 import time
+import cProfile
 
 
 def ddot(x, y, comm):
@@ -75,9 +76,17 @@ if __name__ == '__main__':
     m = n // size + (1 if rank < n % size else 0)
     extra = (0 if rank < n % size else 1) # для выравнивания памяти
     start = rank * (n // size) + min(n % size, rank)
-    A = np.genfromtxt("A.txt", skip_header = start, skip_footer = n - start - m).reshape(m, -1)
-    b = np.genfromtxt("b.txt", skip_header = start, skip_footer = n - start - m)
+    A = np.fromfile("A.npy", count = m * n, offset = start * n * 8).reshape(m, -1)
+    b = np.fromfile("b.npy", count = m, offset = start * 8)
+
     x_0 = np.random.rand(m + extra)
     res = np.random.rand(m)
+    comm.Barrier()
+    start_time = time.time()
     CG(A, b, x_0, 1e-8, comm)
+    comm.Barrier()
+    end_time = time.time()
+    if rank == 0:
+        print(end_time - start_time)
+    MPI.Finalize()
 
