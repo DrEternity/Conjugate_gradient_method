@@ -9,4 +9,4 @@
 
 Результаты численных экспериментов приведены в отчётах для каждой реализации
 
-[Картинка](https://github.com/DrEternity/Conjugate_gradient_method/blob/main/cg.png?raw=true)
+![Картинка](https://github.com/DrEternity/Conjugate_gradient_method/blob/main/cg.png?raw=true)
